@@ -1,0 +1,50 @@
+version: '3'
+
+networks:
+    magento_paraje:
+
+services:
+    nginx_urb_paraje_mg:
+        image: nginx:stable-alpine
+        container_name: nginx_urb_paraje_mg
+        ports:
+            - "9090:80"
+        volumes:
+            - ./magento_web:/var/www/html
+            - "./nginx/default.conf:/etc/nginx/conf.d/default.conf"
+        depends_on: 
+            - php_urb_paraje_mg
+            - mysql_urb_paraje_mg
+        networks:
+            - magento_paraje
+    
+    mysql_urb_paraje_mg:
+        image: mysql:5.7.22
+        container_name: mysql_urb_paraje_mg
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "4306:3306"
+        volumes:
+            - ./mysql_data:/var/lib/mysql
+        environment: 
+            MYSQL_DATABASE: magentov2
+            MYSQL_USER: urbdbuser
+            MYSQL_PASSWORD: urbP455
+            MYSQL_ROOT_PASSWORD: urbP455
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql_urb_paraje_mg
+        networks:
+            - magento_paraje
+    
+    php_urb_paraje_mg:
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        container_name: php_urb_paraje_mg
+        volumes:
+            - ./magento_web:/var/www/html
+        ports:
+            - "9000:9000"
+        networks:
+            - magento_paraje
