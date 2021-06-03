@@ -49,8 +49,8 @@ services:
         networks:
             - magento_paraje
 
-        composer:
-            image: composer:1.9
-            command: ["composer", "install"]
-            volumes:
-                - ./magento_web:/var/www/html
+    composer:
+        image: composer:1.9
+        command: ["composer", "install"]
+        volumes:
+            - ./magento_web:/var/www/html
