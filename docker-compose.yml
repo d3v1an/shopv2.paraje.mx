@@ -13,7 +13,6 @@ services:
             - ./magento_web:/app
             - "./nginx/default.conf:/etc/nginx/conf.d/default.conf"
         depends_on: 
-            - php_urb_paraje_mg
             - mysql_urb_paraje_mg
         networks:
             - magento_paraje
@@ -42,6 +41,8 @@ services:
             context: .
             dockerfile: Dockerfile
         container_name: php_urb_paraje_mg
+        depends_on: 
+            - nginx_urb_paraje_mg
         volumes:
             - ./magento_web:/app
         ports:
@@ -49,8 +50,8 @@ services:
         networks:   
             - magento_paraje
 
-    composer:
-        image: composer:2.0.14
-        command: ["composer", "install"]
-        volumes:
-            - ./magento_web:/app
+    # composer:
+    #     image: composer:2.0.14
+    #     command: ["composer", "install"]
+    #     volumes:
+    #         - ./magento_web:/app

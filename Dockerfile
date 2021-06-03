@@ -82,6 +82,7 @@ RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/
 
 # Install PHP_CodeSniffer
 # RUN composer global require "squizlabs/php_codesniffer=*"
+RUN composer install
 
 # Cleanup dev dependencies
 RUN apk del -f .build-deps
