@@ -7,7 +7,8 @@ RUN apk add --no-cache --virtual .build-deps \
     imagemagick-dev \
     libtool \
     libxml2-dev \
-    sqlite-dev
+    sqlite-dev \
+    libxslt-dev
 
 # Install production dependencies
 RUN apk add --no-cache \
@@ -33,7 +34,8 @@ RUN apk add --no-cache \
     openssh-client \
     postgresql-libs \
     rsync \
-    zlib-dev
+    zlib-dev \
+    libxslt-dev
 
 # Install PECL and PEAR extensions
 RUN pecl install \
@@ -64,7 +66,10 @@ RUN docker-php-ext-install \
     pcntl \
     tokenizer \
     xml \
-    zip
+    zip \
+    soap \
+    xsl \
+    sockets
 
 RUN cd /usr/local/etc/php/conf.d/ && \
     echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini
