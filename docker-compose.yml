@@ -46,11 +46,11 @@ services:
             - ./magento_web:/app
         ports:
             - "9000:9000"
-        networks:
+        networks:   
             - magento_paraje
 
-    # composer:
-    #     image: composer:1.9
-    #     command: ["composer", "install"]
-    #     volumes:
-    #         - ./magento_web:/app
+    composer:
+        image: composer:2.0.14
+        command: ["composer", "install"]
+        volumes:
+            - ./magento_web:/app
