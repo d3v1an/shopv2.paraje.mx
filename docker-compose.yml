@@ -42,8 +42,6 @@ services:
             context: .
             dockerfile: Dockerfile
         container_name: php_urb_paraje_mg
-        depends_on: 
-            - nginx_urb_paraje_mg
         volumes:
             - ./magento_web:/var/www/html
         ports:
